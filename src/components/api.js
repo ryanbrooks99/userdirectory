@@ -1,34 +1,10 @@
-import React from "react";
+import axios from "axios";
 
-export default class API extends React.Component {
+const BASEURL = "https://randomuser.me/api/?results=20&nat=us";
 
-    state = {
-        loading: true,
-        person: null
-    }
-
-    async componentDidMount() {
-        const url = "https//randomuser.me/api/";
-        const response = await fetch(url);
-        const data = await response.json();
-        this.setState({person: data.results[0], loading: false})
-    }
-
-
-    render() {
-        return (
-            <div>
-            {this.state.loading || !this.state.person ? (
-                <div>loading...</div>
-             ) : (
-                 <div>
-                 <div>{this.state.person.name.title}</div>
-                 <div>{this.state.person.name.first}</div>
-                 <div>{this.state.person.name.last}</div>
-                 </div>
-             )}
-        </div>
-    
-        );
-    }
-}
+// Export an object with a "search" method that searches the Random User API
+export default {
+  search: function(query) {
+    return axios.get(BASEURL);
+  }
+};
