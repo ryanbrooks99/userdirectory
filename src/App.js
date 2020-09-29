@@ -1,15 +1,31 @@
 import React from "react"
 import users from "./users.json"
+import SearchForm from "./components/SearchForm"
+import Header from "./Header"
+
+
 
 class App extends React.Component {
 
+
   state = {
-    usersList: users
+    usersList: users,
+    sortOrder: ""
   }
 
+  handleSort =() => {
+
+  }
   render() {
     return (
+  
       <>
+      <div>
+      <Header />
+      <SearchForm />
+      </div>
+     
+
         <table className="table">
           <thead>
             <tr>
@@ -25,7 +41,7 @@ class App extends React.Component {
           {this.state.usersList.map(user => (
             <tr>
               <th scope="row">{}</th>
-              <td><img src={user.picture.thumbnail} /></td>
+              <td><img alt="" src={user.picture.thumbnail} /></td>
               <td>{user.name.first}</td>
               <td>{user.name.last}</td>
               <td>{user.phone}</td>
