@@ -22,7 +22,7 @@ class App extends React.Component {
     const currentValueArray = event.target.value.toLocaleLowerCase().split("")
     if(currentValueArray.length === 0) {
       this.setState({
-        users: this.state.shadowUsers
+        usersList: this.state.shadowUsers
       })
     } else {
       const newUser = this.state.shadowUsers.filter(user => {
@@ -32,12 +32,12 @@ class App extends React.Component {
         for(let i = 0; i < currentValueArray.length; i++) {
           comparisonArray.push(fullName[i])
         }
-
+        console.log(comparisonArray.join(""), currentValueArray.join(""))
         return comparisonArray.join("") === currentValueArray.join("");
       })
 
       this.setState({
-        user: newUser
+        usersList: newUser
       })
     }
 
@@ -49,10 +49,8 @@ class App extends React.Component {
       <>
       <div>
       <Header />
-      <SearchForm />
+      <SearchForm handleInputChange={this.handleInputChange}/>
       </div>
-     
-
         <table className="table">
           <thead>
             <tr>
@@ -77,7 +75,6 @@ class App extends React.Component {
           ))};
           </tbody>
         </table>
-
       </>
     );
   }
