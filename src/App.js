@@ -14,7 +14,37 @@ class App extends React.Component {
   }
 
   handleSort =() => {
-    
+    console.log("test")
+    let newSort
+      if (this.state.sortOrder !== "des") {
+        console.log("one")
+        newSort = this.state.usersList.sort((a, b) => {
+          let comparison = 0;
+          if (a.name.first > b.name.first) {
+            comparison = 1;
+          } else if (a.name.first < b.name.first) {
+            comparison = -1;
+          }
+          return comparison;
+        }
+      );
+    }
+    else {
+      console.log("two")
+      newSort = this.state.usersList.sort((a, b) => {
+        let comparison = 0;
+        if (a.name.first > b.name.first) {
+          comparison = -1;
+        } else if (a.name.first < b.name.first) {
+          comparison = 1;
+        }
+        return comparison;
+      }
+      );
+    }
+    const newSortOrder = this.state.sortOrder === "des"? "asc": "des"
+    console.log(newSort)
+    this.setState({usersList: newSort, sortOrder: newSortOrder})
   }
 
   handleInputChange = (event) => {
@@ -56,10 +86,10 @@ class App extends React.Component {
             <tr>
               <th scope="col">#</th>
               <th scope="col">Picture</th>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">Phone</th>
-              <th scope="col">Email</th>
+              <th scope="col" onClick={() => this.handleSort()}>First Name</th>
+              <th scope="col" onClick={() => this.handleSort()}>Last Name</th>
+              <th scope="col" onClick={() => this.handleSort()}>Phone</th>
+              <th scope="col" onClick={() => this.handleSort()}>Email</th>
             </tr>
           </thead>
           <tbody>
